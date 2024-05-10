@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Search</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <scrip
+</head>
+<body>
+    <h1>Database Search</h1>
+    <label for="primary_key">Enter Primary Key:</label>
+    <input type="text" id="primary_key" name="primary_key">
+    <button onclick="search()">Search</button>
+    <div id="result"></div>
+
+    <script>
+        function search() {
+            console.log('Search button clicked');
+            var primaryKey = document.getElementById("primary_key").value;
+            if (primaryKey) {
+                fetch('/search?primary_key=' + primaryKey)
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("result").innerHTML = data;
+                    })
+                    .catch(error => console.error('Error:', error));
+            } else {
+                console.error('Primary key is empty');
+            }
+        }
+    </script>
+</body>
+</html>
